@@ -13,14 +13,9 @@ class PriceFetcherService
   end
 
   def call
-    begin
-      @response = Net::HTTP.get_response(URI(@url))
-      @success = true if @response.is_a?(Net::HTTPSuccess)
-    rescue StandardError => error
-      @error = error.to_s
-      AUDIT_LOG.info("Error fetching price api - #{@error}")
-    end
-
+    @response = Net::HTTP.get_response(URI(@url))
+    @success = true if @response.is_a?(Net::HTTPSuccess)
+    
     self
   end
 end
