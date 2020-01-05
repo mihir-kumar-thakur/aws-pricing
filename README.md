@@ -8,6 +8,7 @@
  1. Rails 6.0.2.1
  2. ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-linux]
  3. MySql 8.0.18-0ubuntu0.19.10.1 (Ubuntu)
+ 4. Bundler - 2.1.0
 
 ### GET /service/AmazonCloudFront/region/us-east-1
 http://localhost:3000/service/AmazonCloudFront/region/us-east-1
