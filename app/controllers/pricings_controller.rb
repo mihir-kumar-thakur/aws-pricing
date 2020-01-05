@@ -3,12 +3,8 @@ class PricingsController < ApplicationController
     offer = Offer.find_by(code: params[:offer_code])
     region = Region.find_by(code: params[:region_code])
 
-    if offer.present? && region.present?
-      render json: Pricing.for(offer.code, region.id)
-    else
-      render json: {
-        error: "We could not find AWS pricing for your query."
-      }, status: :not_found
-    end
+    raise ActiveRecord::RecordNotFound unless offer.present? && region.present?
+    
+    render json: Pricing.for(offer.code, region.id, params[:date])
   end
 end

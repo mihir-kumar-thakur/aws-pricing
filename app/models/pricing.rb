@@ -1,8 +1,11 @@
 class Pricing < ApplicationRecord
   belongs_to :product
 
-  def self.for(offer_code, region_id)
-    joins([product: :offer]).where("offers.code = ? && products.region_id = ?", offer_code, region_id)
+  # date = yyyy-mm-dd
+  def self.for(offer_code, region_id, date = nil)
+    pricing = joins([product: :offer]).where("offers.code = ? && products.region_id = ?", offer_code, region_id)
+
+    date.present? ? pricing.where("DATE(pricings.created_at) <= ?", date) : pricing
   end
 
   def as_json(options = {})
